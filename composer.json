@@ -1,0 +1,20 @@
+{
+  "name": "programarivm/sms-twilio-webhook",
+  "description": "Distributed app to send SMS messages. This is Twilio's webhook to track the delivery status of the SMS messages.",
+  "authors": [
+    {
+      "name": "Jordi Bassagañas",
+      "email": "info@programarivm.com",
+      "homepage": "https://programarivm.com"
+    }
+  ],
+  "require": {
+    "vlucas/phpdotenv": "^2.5",
+    "doctrine/orm": "^2.6"
+  },
+  "autoload": {
+    "psr-4": {
+    "SmsTwilioWebhook\\": "src/"
+    }
+  }
+}
