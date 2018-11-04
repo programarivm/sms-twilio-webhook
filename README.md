@@ -13,11 +13,11 @@ This web app is split into four loosely coupled parts -- repos that can run in d
 | [`programarivm/sms`](https://github.com/programarivm/sms)                      | JWT-authenticated API and RabbitMQ producer                                                |
 | [`programarivm/sms-spa`](https://github.com/programarivm/sms-spa)              | React SPA created with [`create-react-app`](https://github.com/facebook/create-react-app)  |
 | [`programarivm/sms-consumer`](https://github.com/programarivm/sms-consumer)    | RabbitMQ consumer                                                                          |
-| [`php-sms-twilio-webhook`](https://github.com/programarivm/sms-twilio-webook)  | Twilio's webhook to track the delivery status of the SMS messages                          |
+| [`programarivm/sms-twilio-webhook`](https://github.com/programarivm/sms-twilio-webook)  | Twilio's webhook to track the delivery status of the SMS messages                          |
 
 # SMS Twilio Webhook
 
-This is the `php-sms-twilio-webhook` repo, a Twilio's webhook to track the delivery status of the SMS messages.
+This is the `programarivm/sms-twilio-webhook` repo, a Twilio's webhook to track the delivery status of the SMS messages.
 
 ### Start the Docker Services
 
@@ -40,13 +40,17 @@ Copy and paste the following into your `.env` file:
 
 > **Note**: the database values must be the same as in the `app/config/parameters.yml` file in the [`programarivm/sms`](https://github.com/programarivm/sms) app.
 
-### TODO
+### TODOs
 
-Write more documentation.
+- Set up a web server
+
+- Add an HTTP endpoint to process Twilio's request
+
+- Write more documentation
 
 ### Contributions
 
-Would you help make this library better? Contributions are welcome.
+Contributions are welcome.
 
 - Feel free to send a pull request
 - Drop an email at info@programarivm.com with the subject "SMS Contributions"
