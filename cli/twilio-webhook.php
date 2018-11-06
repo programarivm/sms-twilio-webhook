@@ -1,5 +1,10 @@
 <?php
 
+// TODOs:
+// 1. Add the sid field to the Message entity in the sms repo
+// 2. Update the message's sid and status in the consumer.php script in sms-consumer
+// 3. Test this script on a staging server
+
 require __DIR__.'/../vendor/autoload.php';
 
 use Dotenv\Dotenv;
@@ -7,9 +12,13 @@ use React\Http\Server;
 use React\Http\Response;
 use React\EventLoop\Factory;
 use Psr\Http\Message\ServerRequestInterface;
+use SmsTwilioWebhook\EntityManager;
 
 $dotenv = new Dotenv(__DIR__.'/../');
 $dotenv->load();
+
+$em = (new EntityManager())->get();
+$conn = $em->getConnection();
 
 $loop = React\EventLoop\Factory::create();
 
@@ -18,13 +27,14 @@ $server = new Server(function (ServerRequestInterface $request) {
     $method = $request->getMethod();
     if ($path === '/twilio-webhook') {
         if ($method === 'POST') {
-            // TODO
-            // Update the message table
-            // Track the delivery status of the message as in https://www.twilio.com/docs/sms/tutorials/how-to-confirm-delivery-php
+            $body = $request->getParsedBody();
+            $sid = $body['MessageSid'];
+            $status = $body['MessageStatus'];
+            $count = $conn->executeUpdate('UPDATE message SET status = ? WHERE sid = ?', [$status, $sid]);
             return new React\Http\Response(
                 200,
                 array('Content-Type' => 'text/plain'),
-                'Delivery status successfully tracked!'.PHP_EOL
+                'Delivery status tracked'.PHP_EOL
             );
         }
     }
