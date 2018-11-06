@@ -43,7 +43,7 @@ Copy and paste the following into your `.env` file:
 
 > **Note**: the database values must be the same as in the `app/config/parameters.yml` file in the [`programarivm/sms`](https://github.com/programarivm/sms) app.
 
-The value of `DATABASE_HOST` is replaced from 127.0.0.1 to 172.26.0.5, which is the IP of the MySQL container. The same thing goes for `TWILIO_WEBHOOK_IP`.
+The value of `DATABASE_HOST` is replaced from `127.0.0.1` to `172.26.0.5`, which is the IP of the MySQL container. The same thing goes for `TWILIO_WEBHOOK_IP`.
 
 The `IPAddress` is obtained this way:
 
