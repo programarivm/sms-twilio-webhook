@@ -4,6 +4,8 @@ services:
   php_fpm:
       build: .
       container_name: sms_twilio_webhook_php_fpm
+      ports:
+          - "8081:80"
       working_dir: /usr/share/nginx/sms
       volumes:
           - ./:/usr/share/nginx/sms

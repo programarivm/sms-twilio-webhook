@@ -17,7 +17,7 @@ This web app is split into four loosely coupled parts -- repos that can run in d
 
 # SMS Twilio Webhook
 
-This is the `programarivm/sms-twilio-webhook` repo, a Twilio's webhook to track the delivery status of the SMS messages.
+This is the `programarivm/sms-twilio-webhook` repo, a Twilio's webhook to track the delivery status of the SMS messages as explained at [Track Delivery Status of Messages in PHP](https://www.twilio.com/docs/sms/tutorials/how-to-confirm-delivery-php?code-sample=code-handle-a-sms-statuscallback&code-language=PHP&code-sdk-version=default).
 
 ### Start the Docker Services
 
@@ -31,22 +31,29 @@ This is the `programarivm/sms-twilio-webhook` repo, a Twilio's webhook to track 
 
 Copy and paste the following into your `.env` file:
 
-    DATABASE_DRIVER=pdo_mysql
-    DATABASE_HOST=172.27.0.5
-    DATABASE_PORT=3306
-    DATABASE_NAME=sms
-    DATABASE_USER=root
-    DATABASE_PASSWORD=password
+	DATABASE_DRIVER=pdo_mysql
+	DATABASE_HOST=172.27.0.5
+	DATABASE_PORT=3306
+	DATABASE_NAME=sms
+	DATABASE_USER=root
+	DATABASE_PASSWORD=password
+
+	TWILIO_WEBHOOK_IP=172.30.0.2
+	TWILIO_WEBHOOK_PORT=8081
 
 > **Note**: the database values must be the same as in the `app/config/parameters.yml` file in the [`programarivm/sms`](https://github.com/programarivm/sms) app.
 
-### TODOs
+The value of `DATABASE_HOST` is replaced from 127.0.0.1 to 172.26.0.5, which is the IP of the MySQL container. The same thing goes for `TWILIO_WEBHOOK_IP`.
 
-- Set up a web server
+The `IPAddress` is obtained this way:
 
-- Add an HTTP endpoint to process Twilio's request
+	docker inspect sms_mysql
+	docker inspect sms_twilio_webhook_php_fpm
 
-- Write more documentation
+### Run the Webhook
+
+	docker exec -it --user 1000:1000 sms_twilio_webhook_php_fpm php cli/twilio-webhook.php
+	Twilio webhook running at http://172.30.0.2:8081/twilio-webhook
 
 ### Contributions
 
